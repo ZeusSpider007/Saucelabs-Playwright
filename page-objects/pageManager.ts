@@ -1,9 +1,11 @@
-import { Page, expect } from "@playwright/test";
+import { Page } from "@playwright/test";
 import { LoginPage } from "./loginPage";
+import { MainPage } from "./mainPage";
 
 export class PageManager {
   private readonly page: Page;
   private readonly loginPage: LoginPage;
+  private readonly mainpage: MainPage;
 
   constructor(page: Page) {
     this.page = page;
@@ -12,5 +14,9 @@ export class PageManager {
 
   onLoginpage() {
     return this.loginPage;
+  }
+
+  onMainPage(){
+    return this.mainpage;
   }
 }

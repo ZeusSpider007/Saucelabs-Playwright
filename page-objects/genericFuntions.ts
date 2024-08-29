@@ -1,6 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test";
 
-
 // Function to highlight an element using Locator
 export async function highlightElement(element: Locator) {
     await element.evaluate((el) => {
