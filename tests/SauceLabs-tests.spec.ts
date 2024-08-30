@@ -1,10 +1,11 @@
 import { test } from '../fixtures/fixtures'
+import { PageManager } from '../page-objects/pageManager';
 
 test.describe("Sauce Demo Test Suite", () => {
 
 
   test.beforeEach(async ({ page }) => {
-    await page.goto("https://www.saucedemo.com/");
+    await page.goto("/");
   });
 
   test("Verification of Login Page Components", async ({ pageManager }) => {
@@ -20,7 +21,7 @@ test.describe("Sauce Demo Test Suite", () => {
   });
 
 
-  test("Verify Login using Standard User", async ({ pageManager }) => {
+  test("Verify Login using Standard User and Validate Main Page Components", async ({ pageManager }) => {
 
     await pageManager.onLoginpage().loginUsingStandardUser();
     await pageManager.onLoginpage().validateSucessfulLogin();
@@ -28,7 +29,15 @@ test.describe("Sauce Demo Test Suite", () => {
     await pageManager.onMainPage().verifycartmenubutton();
     await pageManager.onMainPage().verifyfilterdropdowncontainer();
     await pageManager.onMainPage().verifyfootersocialmedialinks();
-  })
+  });
+
+
+  test("Verify the Products in the Available Inventory",async({pageManager})=>{
+
+    await pageManager.onLoginpage().loginUsingStandardUser();
+    await pageManager.onMainPage().verifyInventoryItems();
+
+  });
 
 
 });

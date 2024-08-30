@@ -93,5 +93,25 @@ export class MainPage {
 
 
 
+    async verifyInventoryItems(){
+
+        
+
+        const inventoryItems = this.page.locator("//div[@class='inventory_item']");
+        const itemCount = await inventoryItems.count();
+        expect(itemCount).toBe(6);
+
+        const InventoryitemListTitle = this.page.locator("div[class='inventory_item_name ']");
+        const itemTexts = await InventoryitemListTitle.allInnerTexts();
+        const expectedValues = ['Sauce Labs Backpack', 'Sauce Labs Bike Light', 'Sauce Labs Bolt T-Shirt', 'Sauce Labs Fleece Jacket', 'Sauce Labs Onesie','Test.allTheThings() T-Shirt (Red)'];
+        expect(itemTexts.length).toBe(expectedValues.length);
+
+        //fetching all the inner texts and comparing with the expected value lists.
+        itemTexts.forEach((text, index) => {
+            expect(text.trim()).toBe(expectedValues[index]);
+
+        });
+
+    }
 
 }
