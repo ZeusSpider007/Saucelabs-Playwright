@@ -1,5 +1,3 @@
-//import { test, expect } from "@playwright/test";
-import { PageManager } from "../page-objects/pageManager";
 import { test } from '../fixtures/fixtures'
 
 test.describe("Sauce Demo Test Suite", () => {
@@ -26,6 +24,10 @@ test.describe("Sauce Demo Test Suite", () => {
 
     await pageManager.onLoginpage().loginUsingStandardUser();
     await pageManager.onLoginpage().validateSucessfulLogin();
+    await pageManager.onMainPage().verifyMenuButton();
+    await pageManager.onMainPage().verifycartmenubutton();
+    await pageManager.onMainPage().verifyfilterdropdowncontainer();
+    await pageManager.onMainPage().verifyfootersocialmedialinks();
   })
 
 

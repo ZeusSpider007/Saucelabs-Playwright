@@ -10,6 +10,7 @@ export class PageManager {
   constructor(page: Page) {
     this.page = page;
     this.loginPage = new LoginPage(this.page);
+    this.mainpage = new MainPage(this.page);
   }
 
   onLoginpage() {
