@@ -9,7 +9,7 @@ test.describe("Sauce Demo Test Suite", () => {
   });
 
   test("Verification of Login Page Components", async ({ pageManager }) => {
-    
+
     await pageManager.onLoginpage().verifyLoginPageHeaderText();
     await pageManager.onLoginpage().verifyLoginPageUsernameField();
     await pageManager.onLoginpage().verifyLoginPagePasswordField();
@@ -44,9 +44,14 @@ test.describe("Sauce Demo Test Suite", () => {
     await pageManager.onLoginpage().loginUsingStandardUser();
     await pageManager.onMainPage().addInventoryItemstoCart();
     await pageManager.onMainPage().clickOnCartButton();
-    await pageManager.onCartPage().fetchPricesFromCartItems();
+    await pageManager.onCartPage().fetchTotalAmountFromCartItems();
     await pageManager.onCartPage().validateCartPageButtonElements();
-
+    await pageManager.onCartPage().ClickonCheckoutButton();
+    await pageManager.onCheckoutPage().verifyCheckoutPageOneElements();
+    await pageManager.onCheckoutPage().enterPersonalDetailsOnCheckoutPage();
+    await pageManager.onCheckoutPage().clickOnContinueButton();
+    await pageManager.onCheckoutPage().validateTotalPriceOnFinalCheckoutPage();
+    await pageManager.onCheckoutPage().verifyOrderisPlacedSucessfully();
   })
 
 

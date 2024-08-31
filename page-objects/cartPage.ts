@@ -7,10 +7,11 @@ export class CartPage {
 
     constructor(page: Page) {
         this.page = page;
+        
     }
 
 
-    async fetchPricesFromCartItems(): Promise <number> {
+    async fetchTotalAmountFromCartItems(): Promise <number> {
 
         const priceElements = this.page.locator('.inventory_item_price');
         // Fetch all price texts
@@ -67,7 +68,11 @@ export class CartPage {
     }
 
 
-
+    async ClickonCheckoutButton(){
+        const CheckoutButton = this.page.locator('#checkout');
+        await CheckoutButton.click();
+    }
+    
 
 
 
