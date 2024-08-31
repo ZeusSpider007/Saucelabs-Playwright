@@ -85,6 +85,8 @@ export class LoginPage {
     
     const HeaderTxt = this.page.locator('.app_logo');
     await expect(HeaderTxt).toBeVisible();
+    const ExpectedURL = "https://www.saucedemo.com/inventory.html";
+    await utils.validatePageUrl(this.page,ExpectedURL);
 
   }
 

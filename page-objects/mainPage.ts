@@ -93,9 +93,7 @@ export class MainPage {
 
 
 
-    async verifyInventoryItems(){
-
-        
+    async verifyInventoryItems() {
 
         const inventoryItems = this.page.locator("//div[@class='inventory_item']");
         const itemCount = await inventoryItems.count();
@@ -103,7 +101,7 @@ export class MainPage {
 
         const InventoryitemListTitle = this.page.locator("div[class='inventory_item_name ']");
         const itemTexts = await InventoryitemListTitle.allInnerTexts();
-        const expectedValues = ['Sauce Labs Backpack', 'Sauce Labs Bike Light', 'Sauce Labs Bolt T-Shirt', 'Sauce Labs Fleece Jacket', 'Sauce Labs Onesie','Test.allTheThings() T-Shirt (Red)'];
+        const expectedValues = ['Sauce Labs Backpack', 'Sauce Labs Bike Light', 'Sauce Labs Bolt T-Shirt', 'Sauce Labs Fleece Jacket', 'Sauce Labs Onesie', 'Test.allTheThings() T-Shirt (Red)'];
         expect(itemTexts.length).toBe(expectedValues.length);
 
         //fetching all the inner texts and comparing with the expected value lists.
@@ -114,4 +112,39 @@ export class MainPage {
 
     }
 
+    async addInventoryItemstoCart() {
+
+        const itemsList = ['sauce-labs-onesie', 'sauce-labs-bike-light', 'sauce-labs-bolt-t-shirt', 'sauce-labs-fleece-jacket'];
+        let noofitemsselected: number = 0;
+        let i: number = 0;
+
+        for (const item of itemsList) {
+            noofitemsselected = ++i;
+
+            const xpath = `//button[@id='add-to-cart-${item}']`;
+            const addToCartButton = this.page.locator(xpath);
+        
+            if (await addToCartButton.count() > 0) {
+                await addToCartButton.click({ force: true });
+                console.log(`Clicked on the button with ID: add-to-cart-${item}`);
+            } else {
+                console.log(`Button with ID: add-to-cart-${item} not found`);
+            }
+        }
+
+        const CountofRemovetoCartButtons = await this.page.locator("//button[starts-with(@id, 'remove-')]").count();;
+        expect(noofitemsselected).toBe(CountofRemovetoCartButtons)
+
+        //verify the the shopping card badge number is correct as per the additional of the inventory items.
+        const cartBadge = this.page.locator('.shopping_cart_badge');
+        const badgeValueText = await cartBadge.textContent();
+        const badgeValue = parseInt(badgeValueText || '0', 10);
+        expect(noofitemsselected && CountofRemovetoCartButtons).toBe(badgeValue);
+    }
+
+    async clickOnCartButton(){
+        const CartButton = this.page.locator('.shopping_cart_link');
+        await expect(CartButton).toBeVisible();
+        await CartButton.click();
+    }
 }

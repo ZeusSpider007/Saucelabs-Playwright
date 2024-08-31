@@ -9,7 +9,7 @@ test.describe("Sauce Demo Test Suite", () => {
   });
 
   test("Verification of Login Page Components", async ({ pageManager }) => {
-
+    
     await pageManager.onLoginpage().verifyLoginPageHeaderText();
     await pageManager.onLoginpage().verifyLoginPageUsernameField();
     await pageManager.onLoginpage().verifyLoginPagePasswordField();
@@ -32,12 +32,24 @@ test.describe("Sauce Demo Test Suite", () => {
   });
 
 
-  test("Verify the Products in the Available Inventory",async({pageManager})=>{
+  test("Verify the Products in the Available Inventory", async ({ pageManager }) => {
 
     await pageManager.onLoginpage().loginUsingStandardUser();
     await pageManager.onMainPage().verifyInventoryItems();
 
   });
+
+  test("Verify End to End Inventory Checkout and Order Placement", async ({ pageManager }) => {
+
+    await pageManager.onLoginpage().loginUsingStandardUser();
+    await pageManager.onMainPage().addInventoryItemstoCart();
+    await pageManager.onMainPage().clickOnCartButton();
+    await pageManager.onCartPage().fetchPricesFromCartItems();
+    await pageManager.onCartPage().validateCartPageButtonElements();
+
+  })
+
+
 
 
 });

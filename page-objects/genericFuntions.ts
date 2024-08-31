@@ -10,4 +10,11 @@ export async function highlightElement(element: Locator) {
     });
   }
 
+//Function to verify the URL
 
+export async function validatePageUrl(page: Page, expectedUrl: string) {
+  // Get the current URL
+  const currentUrl = page.url();
+  // Validate the current URL using an assertion
+  expect(currentUrl).toBe(expectedUrl);
+}
